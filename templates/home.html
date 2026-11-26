@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="title">Home</h1>
+<h1>{{ title }}</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        {% if products %}
+        {% for i in products %}
+        <div class="col-3">
+            <section class="card" style="max-width: 95%">
+                <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title">{{ i.title }}</h4>
+                    <p class="card-text">{{ i.des }}</p>
+                    <h3>Price : {{ i.price }}</h3>
+                    <h3>Category : {{ i.category }}</h3>
+                    <h3>Stock : {{ i.stock }}</h3>
+                    <a href="{% url 'view_product' pk=i.pk %}" class="btn-solid theme-primary">View</a>
+                </div>
+            </section>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No Data Available</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
